@@ -4,7 +4,10 @@ django-slopeone
 Generates rating predictions based on the Slope One algorithm.
 The rating predictions can be used for recommendations.
 
-See http://en.wikipedia.org/wiki/Slope_One for an explanaition of Slope One.
+You can check out the following links about the Slope One algorithm:
+
+- http://en.wikipedia.org/wiki/Slope_One
+- http://www.daniel-lemire.com/fr/documents/publications/lemiremaclachlan_sdm05.pdf
 
 Note: This project is under development and things will most likely change.
 Don't use it in production systems.
