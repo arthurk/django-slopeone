@@ -2,3 +2,4 @@
 *.swp
 django_slopeone.egg-info
 ve
+testproject/db
