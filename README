@@ -4,9 +4,10 @@ django-slopeone
 Generates rating predictions based on the Slope One algorithm.
 The rating predictions can be used for recommendations.
 
-See http://en.wikipedia.org/wiki/Slope_One for an explanaition of the algorithm.
+See http://en.wikipedia.org/wiki/Slope_One for an explanaition of Slope One.
 
-Note: This project is under development and things will most likely change. Don't use it in production systems.
+Note: This project is under development and things will most likely change.
+Don't use it in production systems.
 
 Installation
 ------------
@@ -20,9 +21,11 @@ Usage
 
 1. Add some ratings to the `Rating` table. You can use the admin for that.
 2. Run the `manage.py update_calculations` command
-3. In your view, import `slopeone.core.recommend` and execute it with the user for which the recommendations should be generated.
+3. In your view, import `slopeone.core.recommend` and execute it with the user
+   for which the recommendations should be generated.
 
-The `recommend` method will return a list of recommendations. The output looks like this:
+The `recommend` method will return a list of recommendations.
+The output looks like this:
 
     [(2, 5.0), (1, 3.0)]
 
@@ -33,13 +36,15 @@ and for item 1 it's 3.0. The list is sorted descending by rating.
 Example Project
 ---------------
 
-If you cloned the git repo, you can use the `testproject` to test this project. 
+If you cloned the git repo, you can use the `testproject` to test this project.
 The testproject includes 2 users and 3 rated (animal) fixtures. Here are some
 usage instructions:
 
 (0. You need the `slopeone` module installed/in your pythonpath.)
-1. Run `manage.py syncdb` in the `testproject` dir but don't create a superuser.
-2. Load the fixtures by executing `manage.py loaddata fixtures/*`. (username==password for the user fixtures)
+1. Run `manage.py syncdb` in the `testproject` dir but don't create
+   a superuser.
+2. Load the fixtures by executing `manage.py loaddata fixtures/*`.
+   (username==password for the user fixtures)
 
 The following ratings have been added:
 
@@ -50,24 +55,31 @@ admin  | 5    | 3
 arthur | ?    | 4
 
 
-3. Run the `manage.py update_calculations` command, to compute all required values.
-4. To compute the predicted rating for the user `arthur` and the animal object `cat`, you
-can run the `manage.py show_recommendations` command with the user id 2 as an argument:
+3. Run the `manage.py update_calculations` command, to compute all
+   required values.
+4. To compute the predicted rating for the user `arthur` and the animal object
+   `cat`, you can run the `manage.py show_recommendations` command with the
+   user id 2 as an argument:
 
-    ./manage.py show_recommendations 2
-    $ [(2, 6.0), (1, 4.0)]
+        ./manage.py show_recommendations 2
+        $ [(2, 6.0), (1, 4.0)]
 
-As you see, the predicted rating for arthur/cat would be 6.0. This is because there is only
-one other user (admin), and he rated cat with 5 and dog with 3. So the global difference
-between dog and cat rating is +2. Since arthur rated dog with 4, the prediction will apply
-the difference of the global cat/dog rating to the value of the dog rating. So that 4+2=6.
+As you see, the predicted rating for arthur/cat would be 6.0. This is because
+there is only one other user (admin), and he rated cat with 5 and dog with 3.
+So the global difference between dog and cat rating is +2. Since arthur rated
+dog with 4, the prediction will apply the difference of the global cat/dog
+rating to the value of the dog rating. So that 4+2=6.
 
-The rating for the object with the id 1 is not computed since the user has manually rated that
-object. Rated items are currently not excluded from the return value of the recommend method.
+The rating for the object with the id 1 is not computed since the user has
+manually rated that object. Rated items are currently not excluded from
+the return value of the recommend method.
 
 Known Issues
 ------------
 
-- Items that were already rated by the user are returned in the recommendations. They should be excluded.
-- Ratings don't have a maximum value (to, for example, support ratings from a range from 1-5)
-- Although the contenttypes framework is used, django-slopeone currently only supports one content type.
+- Items that were already rated by the user are returned in 
+  the recommendations. They should be excluded.
+- Ratings don't have a maximum value (to, for example, support ratings from
+  a range from 1-5)
+- Although the contenttypes framework is used, django-slopeone currently only
+  supports one content type.
