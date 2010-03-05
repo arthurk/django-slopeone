@@ -1,0 +1,4 @@
+*.pyc
+*.swp
+django_slopeone.egg-info
+ve
